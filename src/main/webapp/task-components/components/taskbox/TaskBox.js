@@ -39,7 +39,7 @@ export default class TaskBox extends HTMLElement {
 	newTaskCallback(callback) {
 		const title = shadow.getElementById('title').innerText;
 		const statusSelected = shadow.getElementById('status').value;
-		
+		//Missing some logic here
 	}
 	
 	show() {
