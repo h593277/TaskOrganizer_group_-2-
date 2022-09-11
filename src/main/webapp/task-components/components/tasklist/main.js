@@ -1,4 +1,7 @@
+import ajaxController from '../components/ajaxcontroller/main.js';
+
 export default class extends HTMLElement {
+	
     #shadow;
 	
 	 constructor() {
@@ -14,7 +17,7 @@ export default class extends HTMLElement {
 
         const bt = this.#shadow.querySelector('button[type=button]');
 		
-        bt.addEventListener('click', this.#newTask.bind(this));
+        bt.addEventListener('click', this.#showTask.bind(this));
     }
 
   #createStyle() {
@@ -51,41 +54,7 @@ export default class extends HTMLElement {
         this.#shadow.appendChild(wrapper);
         return wrapper;
     }
-
-  #addtaskCallback(callback) {
-	
-	const tasklist = document.querySelector("task-list");
-	tasklist.enableaddtask();
-	const newtask = {
-    "id": 5,
-    "title": "Do DAT152 home work",
-    "status": "ACTIVE"
-	}; 
-	
-	callback(newTask);
-	
-	return tasklist;
-    }
-
- #changestatusCallback(callback) {
-	
-	if(window.confirm("Do you want to change status?") == true)
-	{
-		const tasklist = document.querySelector("task-list");
-		callback(tasklist);
-	}
-
-    }
-
- #deletetaskCallback(callback) {
-	
-	if(window.confirm("Do you want to delete task?") == true)
-	{
-		const tasklist = document.querySelector("task-list");
-		callback(tasklist);
-	}
-
-    }
+  
 
  #noTask() {
 	
@@ -99,31 +68,45 @@ export default class extends HTMLElement {
     }
 
 	
-
+//Show modal dialog of taskbox
     #showTask(newTask) {
-	const task = newTask;  
+/*	const task = newTask;  
+	
+	ajaxController.addTaskCallback(newTask);
+	
         const content = `
 			<p>${task.id}</p>
 			<p>${task.task}</p>
 			<p>${task.status}</p>
-            <button id="status + ${task.id}" type="button">Status</button>
-    		<button id="remove + ${task.id}" type="button">Remove</button>
+            <button id="status${task.id}" type="button">Status</button>
+    		<button id="remove${task.id}" type="button">Remove</button>
         `;
-        const wrapper = document.getElementsByTagName('form')[0];
+
+      	const btStatus = this.#shadow.querySelector('status' + task.id);
+		btStatus.addEventListener('click', this.#updateTask.bind(this));
+		
+		const btRemove = this.#shadow.querySelector('status' + task.id);
+		btRemove.addEventListener('click', this.#removeTask.bind(this));
+	
+        const wrapper = this.#shadow.querySelector('form');
         wrapper.insertAdjacentHTML('beforeend', content);
-        this.#shadow.appendChild(wrapper);
+        this.#shadow.appendChild(wrapper);*/
         return wrapper;
     }
 
 
     #updateTask(id, newStatus) {
+	
 	const tasklist = document.querySelector("task-list");
 	const status = {
-    "id": 1,
-    "status": "ACTIVE"
+    "id": id,
+    "status": newStatus
 	};
 	const taskUpdate = document.getElementById(id);
+	
 	tasklist.updateTask(status);
+	
+	ajaxController.changestatusCallback(status);
 	
     }
 
@@ -133,7 +116,7 @@ export default class extends HTMLElement {
     }
 
   #enabledTask() {
-      const bt = this.#shadow.querySelector('button[type=button]')[0].disabled=false;
+      const bt = this.#shadow.querySelector('button[type=button]').disabled=false;
         return bt;
     }
 

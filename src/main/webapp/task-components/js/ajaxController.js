@@ -1,0 +1,1 @@
+import ajaxController from '../components/ajaxcontroller/main.js';
