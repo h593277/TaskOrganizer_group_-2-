@@ -16,12 +16,9 @@ export default class AjaxController
 
 #addtaskCallback(callback, newTask) {
 	
-	const tasklist = document.querySelector("task-list");
-	//tasklist.enabledTask(); 
-	
-	//callback(newTask);
 	callback.#newTask(newTask);
 	return tasklist;
+	
     }
 
  #changestatusCallback(callback, status, id) {
@@ -38,7 +35,6 @@ export default class AjaxController
 	
 	if(window.confirm("Do you want to delete task?") == true)
 	{
-		const tasklist = document.querySelector("task-list");
 		callback.#deleteTask(id);
 	}
 }
