@@ -1,53 +1,47 @@
 /**
  * 
  */
- import ajaxController from '../components/tasklist/main.js';
- import ajaxController from '../components/taskbox/main.js';
+ import taskList from '../components/tasklist/main.js';
+ import taskBox from '../components/taskbox/main.js';
 
 export default class AjaxController
 {
 	#shadow;
 	
 	 constructor() {
+        super();
         
+        this.#shadow = this.attachShadow({ mode: 'closed' });
     }
 
-#addtaskCallback(callback) {
+#addtaskCallback(callback, newTask) {
 	
 	const tasklist = document.querySelector("task-list");
-	//tasklist.enabledTask();
-	const newTask = {
-    "id": 5,
-    "title": "Do DAT152 home work",
-    "status": "ACTIVE"
-	}; 
+	//tasklist.enabledTask(); 
 	
 	//callback(newTask);
-	this.#showTask(newTask)
+	callback.#newTask(newTask);
 	return tasklist;
     }
 
- #changestatusCallback(callback) {
+ #changestatusCallback(callback, status, id) {
 	
 	if(window.confirm("Do you want to change status?") == true)
 	{
 		const tasklist = document.querySelector("task-list");
-		callback(tasklist);
+		callback.#updateTask(status, id);
 	}
 
     }
 
- #deletetaskCallback(callback) {
+ #deletetaskCallback(callback, id) {
 	
 	if(window.confirm("Do you want to delete task?") == true)
 	{
 		const tasklist = document.querySelector("task-list");
-		callback(tasklist);
+		callback.#deleteTask(id);
 	}
 }
-
-
-
 
 
 
