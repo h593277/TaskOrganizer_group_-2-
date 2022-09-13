@@ -9,7 +9,6 @@ export default class AjaxController
 	#shadow;
 	
 	 constructor() {
-        super();
         
         this.#shadow = this.attachShadow({ mode: 'closed' });
     }
