@@ -2,7 +2,7 @@
 var servicesPath = '../TaskServices/api/services'
 
 //need this bool because style isnt visable to the DOM or shadowDOM
-var bool = true;
+const bool = true;
 
 export default class TaskBox extends HTMLElement {
 	
@@ -25,11 +25,11 @@ export default class TaskBox extends HTMLElement {
 	
 	async setStatusesList() {
 		const response = await this.#getStatuses();
-		var statuses = response.allstatuses;
+		let statuses = response.allstatuses;
 
-		var statusbox = shadow.getElementById('status');
-		for (var i = 0; i<statuses.length; i++){
-		    var opt = document.createElement('option');
+		let statusbox = shadow.getElementById('status');
+		for (let i = 0; i<statuses.length; i++){
+		    let opt = document.createElement('option');
 		    opt.value = statuses[i];
 		    opt.innerHTML = statuses[i];
 		    statusbox.appendChild(opt);

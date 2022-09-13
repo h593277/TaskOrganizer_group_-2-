@@ -1,6 +1,8 @@
 /**
  * 
  */
+ import ajaxController from '../components/tasklist/main.js';
+ import ajaxController from '../components/taskbox/main.js';
 
 export default class AjaxController
 {
