@@ -19,7 +19,7 @@ export default class TaskBox extends HTMLElement {
         
         this.setStatusesList();
         
-        const closebutton = shadow.getElementById("close");
+        const closebutton = this.#shadow.getElementById("close");
         this.#addEventListeners(closebutton);
 	}	
 	
@@ -27,7 +27,7 @@ export default class TaskBox extends HTMLElement {
 		const response = await this.#getStatuses();
 		let statuses = response.allstatuses;
 
-		let statusbox = shadow.getElementById('status');
+		let statusbox = this.#shadow.getElementById('status');
 		for (let i = 0; i<statuses.length; i++){
 		    let opt = document.createElement('option');
 		    opt.value = statuses[i];
@@ -37,8 +37,8 @@ export default class TaskBox extends HTMLElement {
 	}
 	
 	newTaskCallback(callback) {
-		const title = shadow.getElementById('title').innerText;
-		const statusSelected = shadow.getElementById('status').value;
+		const title = this.#shadow.getElementById('title').innerText;
+		const statusSelected = this.#shadow.getElementById('status').value;
 		//Missing some logic here
 	}
 	

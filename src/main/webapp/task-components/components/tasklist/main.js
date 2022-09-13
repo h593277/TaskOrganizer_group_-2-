@@ -1,4 +1,3 @@
-import ajaxController from '../components/ajaxcontroller/main.js';
 
 export default class extends HTMLElement {
 	
