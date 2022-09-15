@@ -20,3 +20,4 @@ const config = {
      */
     servicesPath: '../TaskServices/api/services'
 }
+

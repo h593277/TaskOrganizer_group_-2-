@@ -1,13 +1,14 @@
 'use strict';
-var servicesPath = '../TaskServices/api/services'
 
 //need this bool because style isnt visable to the DOM or shadowDOM
-const bool = true;
+const bool = false;
+const url = '../../TaskServices/api/services'
 
 export default class TaskBox extends HTMLElement {
 	
 	#shadow;
-
+	
+	
 	constructor() {
 		super();
 		
@@ -21,6 +22,8 @@ export default class TaskBox extends HTMLElement {
         
         const closebutton = this.#shadow.getElementById("close");
         this.#addEventListeners(closebutton);
+        
+         
 	}	
 	
 	async setStatusesList() {
@@ -53,7 +56,7 @@ export default class TaskBox extends HTMLElement {
 	}
 	
 	async #getStatuses() {
-		const url = `${servicesPath}/allstatuses`
+		const url = `../../TaskServices/api/services/allstatuses`
 		
 	    try {
 	        const response = await fetch(url, { method: "GET" })
@@ -108,7 +111,7 @@ export default class TaskBox extends HTMLElement {
         const style = `
             .modal {
 				position: absolute;
-				display: block;
+				display: none;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
@@ -127,7 +130,6 @@ export default class TaskBox extends HTMLElement {
 			#titlediv,
 			#statusdiv,
 			#submit {
-				display: block;
 				margin: auto;
 				margin-top: 10px;
 			}

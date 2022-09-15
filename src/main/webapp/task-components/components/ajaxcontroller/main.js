@@ -1,49 +1,53 @@
-/**
- * 
- */
- import taskList from '../components/tasklist/main.js';
- import taskBox from '../components/taskbox/main.js';
-
-export default class AjaxController
+export class AjaxController
 {
-	#shadow;
-	
-	 constructor() {
+	config = "../../TaskServices/api/services"
+	constructor() {
         
-        this.#shadow = this.attachShadow({ mode: 'closed' });
+		//const taskList = document.getElementsByTagName("task-list");
     }
-
-#addtaskCallback(callback, newTask) {
 	
-	callback.#newTask(newTask);
-	return tasklist;
 	
-    }
-
- #changestatusCallback(callback, status, id) {
+	addtaskCallback() {
+        const taskBox = document.getElementsByTagName("task-box");
+		taskBox.show();
+		
+	 }
+	 
+	async changestatusCallback(callback, status, id) {
+		
+		try {
+			await fetch(`${config}/task/${id}`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json; charset=utf-8" },
+				body: JSON.stringify({"status": status})
+			})
+		} catch (error) {
+			console.log(error);
+		}
+		
+	 }
 	
-	if(window.confirm("Do you want to change status?") == true)
-	{
-		const tasklist = document.querySelector("task-list");
-		callback.#updateTask(status, id);
+	deletetaskCallback(callback, id) {
+		
 	}
-
-    }
-
- #deletetaskCallback(callback, id) {
 	
-	if(window.confirm("Do you want to delete task?") == true)
-	{
-		callback.#deleteTask(id);
+	async newTaskCallback(callback, newTask) {
+		try	{
+			await fetch(`${config}/task`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json; charset=utf-8" },
+				body: JSON.stringify({"title": newTask.title, "status": newTask.status})
+			});
+			
+		} catch (error) {
+			console.log(error);
+		}
+		
 	}
-}
-
-
-
 }
 
 async function allStatus() {
-    const url = `${config.servicesPath}/allstatuses`
+    const url = `${config}/allstatuses`
 
     document.querySelector("span").textContent = url;
     const pre = document.querySelector("pre");
