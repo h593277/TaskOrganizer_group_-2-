@@ -1,9 +1,11 @@
-export class AjaxController
+import TaskList from "../tasklist/main.js"
+import TaskBox from "../taskbox/main.js"
+
+export default class AjaxController
 {
 	config = "../../TaskServices/api/services"
 	constructor() {
         
-		//const taskList = document.getElementsByTagName("task-list");
     }
 	
 	

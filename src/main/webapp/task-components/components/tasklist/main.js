@@ -1,6 +1,4 @@
-import { AjaxController } from "../ajaxcontroller/main.js"
-
-export default class extends HTMLElement {
+export default class TaskList extends HTMLElement {
 	
     #shadow;
 	
@@ -15,8 +13,7 @@ export default class extends HTMLElement {
         this.#createHTML();
 		this.#enabledTask();
 		
-		const openModalbt = this.#shadow.getElementById('modalbtn');
-        openModalbt.addEventListener("click", () => {this.addTaskCallback()})
+		
     }
 
   #createStyle() {
@@ -39,7 +36,7 @@ export default class extends HTMLElement {
 
     #createHTML() {
         const content = `
-            <button id="modalbtn" type="button">New Task</button>
+            <button id="modalbtn" disabled type="button">New Task</button>
 			<h1>Task	Status</h1>
 			<h2>----------------------</h2>
 			<table id="table">
@@ -60,9 +57,9 @@ export default class extends HTMLElement {
     }
   
 
- #noTask() {
-	
-	const content = `
+ 	#noTask() {
+		
+		const content = `
           <p>No tasks currently</p>
         `;
         const wrapper = document.createElement('div');
@@ -71,7 +68,7 @@ export default class extends HTMLElement {
         return wrapper;
     }
 	
-//Show modal dialog of taskbox
+	//Show modal dialog of taskbox
     showTask(newTask) {
 		
 		const content = `
@@ -114,15 +111,14 @@ export default class extends HTMLElement {
 		tasklist.removeTask(id);
     }
 
-  	#enabledTask() {
-      const bt = this.#shadow.querySelector('button[type=button]').disabled=false;
+  	enableAddTask() {
+      const bt = this.#shadow.getElementById('modalbtn').disabled=false;
         return bt;
     }
     
     addTaskCallback() {
-		const a = new AjaxController()
-		console.log(a)
-		a.addTaskCallback()
+		const openModalbt = this.#shadow.getElementById('modalbtn');
+        openModalbt.addEventListener("click", () => {this.showTask()})
 	}
 	
 	changeStatusCallback(id, newStatus) {
