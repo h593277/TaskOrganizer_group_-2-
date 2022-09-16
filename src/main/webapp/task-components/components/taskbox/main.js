@@ -26,7 +26,7 @@ export default class TaskBox extends HTMLElement {
          
 	}	
 	
-	async setStatusesList() {
+	async #setStatusesList() {
 		const response = await this.#getStatuses();
 		let statuses = response.allstatuses;
 
@@ -39,10 +39,12 @@ export default class TaskBox extends HTMLElement {
 		}
 	}
 	
-	newTaskCallback(callback) {
+	#newTaskCallback(callback) {
 		const title = this.#shadow.getElementById('title').innerText;
 		const statusSelected = this.#shadow.getElementById('status').value;
 		//Missing some logic here
+		
+		callback(title, statusSelected);
 	}
 	
 	show() {

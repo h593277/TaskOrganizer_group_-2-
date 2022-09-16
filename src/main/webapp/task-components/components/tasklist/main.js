@@ -1,3 +1,4 @@
+
 export default class TaskList extends HTMLElement {
 	
     #shadow;
@@ -52,6 +53,10 @@ export default class TaskList extends HTMLElement {
         `;
         const wrapper = document.createElement('div');
         wrapper.insertAdjacentHTML('beforeend', content);
+        
+        const btStatus = this.#shadow.getElementById(`modalbtn`);
+		btStatus.addEventListener('click', this.#addTaskCallback.bind(this));
+        
         this.#shadow.appendChild(wrapper);
         return wrapper;
     }
@@ -69,7 +74,7 @@ export default class TaskList extends HTMLElement {
     }
 	
 	//Show modal dialog of taskbox
-    showTask(newTask) {
+    #showTask(newTask) {
 		
 		const content = `
 			<tr id="Tasks">
@@ -116,9 +121,8 @@ export default class TaskList extends HTMLElement {
         return bt;
     }
     
-    addTaskCallback() {
-		const openModalbt = this.#shadow.getElementById('modalbtn');
-        openModalbt.addEventListener("click", () => {this.showTask()})
+    addTaskCallback(callback) {
+		//Ajax(callback);
 	}
 	
 	changeStatusCallback(id, newStatus) {

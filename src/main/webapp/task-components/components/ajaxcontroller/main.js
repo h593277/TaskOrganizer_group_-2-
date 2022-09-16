@@ -1,12 +1,15 @@
 export default class AjaxController
 {
-	#taskList;
 	#taskBox;
+	#taskList;
 	config = "../../TaskServices/api/services"
 	constructor() {
     	
-    	this.#taskList = document.getElementsByTagName("task-list");
-    	this.#taskBox = document.getElementsByTagName("task-box");
+    	//this.#taskList = document.getElementsByTagName("task-list");
+    	//this.#taskBox = document.getElementsByTagName("task-box");
+    	
+    	taskBox = document.querySelectorAll("task-box");
+    	taskList = document.querySelectorAll("task-list");
     	
     	this.#taskList.enableAddTask();
     	this.#taskList.addTaskCallback()
@@ -14,8 +17,9 @@ export default class AjaxController
 	
 	
 	addtaskCallback() {
-        const taskBox = document.getElementsByTagName("task-box");
+        
 		taskBox.show();
+		this.addtaskCallback();
 		
 	 }
 	 
@@ -33,11 +37,11 @@ export default class AjaxController
 		
 	 }
 	
-	deletetaskCallback(callback, id) {
+	#deletetaskCallback(callback, id) {
 		
 	}
 	
-	async newTaskCallback(callback, newTask) {
+	async #newTaskCallback(callback, newTask) {
 		try	{
 			await fetch(`${config}/task`, {
 				method: "POST",
