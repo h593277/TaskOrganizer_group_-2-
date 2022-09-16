@@ -7,6 +7,7 @@ const url = '../../TaskServices/api/services'
 export default class TaskBox extends HTMLElement {
 	
 	#shadow;
+	#callback;
 	
 	
 	constructor() {
@@ -18,16 +19,22 @@ export default class TaskBox extends HTMLElement {
         const html = this.#getHTML();
         this.#shadow.appendChild(html);
         
-        this.setStatusesList();
         
         const closebutton = this.#shadow.getElementById("close");
         this.#addEventListeners(closebutton);
-        
+        this.#shadow.querySelector("button").addEventListener("click",this.#post.bind(this))
          
 	}	
 	
-	async #setStatusesList() {
-		const response = await this.#getStatuses();
+	#post(event) {
+        // Samlestatus og title i objekt data
+        // Hvis this.#callback ikke er null
+        this.#callback(data);
+        
+    }
+	
+/*	#setStatusesList() {
+		const response = this.#getStatuses();
 		let statuses = response.allstatuses;
 
 		let statusbox = this.#shadow.getElementById('status');
@@ -38,13 +45,11 @@ export default class TaskBox extends HTMLElement {
 		    statusbox.appendChild(opt);
 		}
 	}
+	*/
 	
 	#newTaskCallback(callback) {
-		const title = this.#shadow.getElementById('title').innerText;
-		const statusSelected = this.#shadow.getElementById('status').value;
-		//Missing some logic here
-		
-		callback(title, statusSelected);
+        this.#callback = callback;
+	
 	}
 	
 	show() {
@@ -99,7 +104,7 @@ export default class TaskBox extends HTMLElement {
 				</div>
 				</select>
 				
-				<input id="submit" type="submit" value="Submit">
+				<input id="submit" type="button" value="Submit">
 			</form>
 			
 		</div>

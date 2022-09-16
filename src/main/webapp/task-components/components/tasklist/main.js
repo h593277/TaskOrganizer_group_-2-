@@ -2,7 +2,10 @@
 export default class TaskList extends HTMLElement {
 	
     #shadow;
-	
+	#addTaskCallback;
+	#changeStatusCallback;
+	#deleteTaskCallback;
+	#callbackAddTask= null;
 	 constructor() {
         
         super();
@@ -12,7 +15,6 @@ export default class TaskList extends HTMLElement {
         this.#shadow = this.attachShadow({ mode: 'closed' });
         this.#createStyle();
         this.#createHTML();
-		this.#enabledTask();
 		
 		
     }
@@ -54,14 +56,17 @@ export default class TaskList extends HTMLElement {
         const wrapper = document.createElement('div');
         wrapper.insertAdjacentHTML('beforeend', content);
         
-        const btStatus = this.#shadow.getElementById(`modalbtn`);
-		btStatus.addEventListener('click', this.#addTaskCallback.bind(this));
-        
         this.#shadow.appendChild(wrapper);
+        
+        const btStatus = this.#shadow.getElementById(`modalbtn`);
+        btStatus.addEventListener('click', this.#OpenModal.bind(this));
         return wrapper;
     }
   
-
+#OpenModal(event) {
+    // Hhvis #callbackAddTsk ike er null
+    //this.#callbackAddTask();
+}
  	#noTask() {
 		
 		const content = `
@@ -107,7 +112,7 @@ export default class TaskList extends HTMLElement {
 		
 		tasklist.updateTask(status);
 		
-		ajaxController.changestatusCallback(status);
+		changestatusCallback(status);
 	
     }
 
@@ -118,18 +123,19 @@ export default class TaskList extends HTMLElement {
 
   	enableAddTask() {
       const bt = this.#shadow.getElementById('modalbtn').disabled=false;
+      console.log(bt);
         return bt;
     }
     
     addTaskCallback(callback) {
-		//Ajax(callback);
+		this.#callbackAddTask = callback;
 	}
 	
-	changeStatusCallback(id, newStatus) {
-		
+	changeStatusCallback(callback) {
+		this.#changeStatusCallback = callback 
 	}
 	
 	deleteTaskCallback(id) {
-		
+		this.#deleteTaskCallback 
 	}
 }
