@@ -1,20 +1,20 @@
 export default class AjaxController {
-    #taskBox;
-    #taskList;
+    #taskBox = null;
+    #taskList = null;
     #callbackAddTask;
     config = "../../TaskServices/api/services"
     constructor() {
 
         //this.#taskList = document.getElementsByTagName("task-list");
         //this.#taskBox = document.getElementsByTagName("task-box");
-
-        taskBox = document.querySelectorAll("task-box");
-        taskList = document.querySelectorAll("task-list");
-
-        taskBox.newtaskCallback(this.newTask.bind(this));
-        taskList.addTaskCallback(this.addTask.bind(this));
-        taskList.changeStatusCallback(this.changestatus.bind(this));
-        taskList.deleteTaskCallback(this.#deletetask.bind(this));
+		console.log(document.querySelector("task-box"));
+        this.#taskBox = document.querySelector("task-box");
+        this.#taskList = document.querySelector("task-list");
+		console.log(this.#taskBox);
+        this.#taskBox.newtaskCallback(this.#newTask.bind(this));
+        this.#taskList.addTaskCallback(this.#addTask.bind(this));
+        this.#taskList.changeStatusCallback(this.changestatus.bind(this));
+        this.#taskList.deleteTaskCallback(this.#deletetask.bind(this));
         // this.addTask(this.#add.bind(this));
         this.#getTasks();
     }
