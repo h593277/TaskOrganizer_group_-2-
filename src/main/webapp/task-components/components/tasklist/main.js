@@ -118,8 +118,10 @@ export default class TaskList extends HTMLElement {
     }
 
     #removeTask(id) {
-		const tasklist = document.querySelector("task-list");
-		tasklist.removeTask(id);
+	console.log(id);
+	console.log(this.#shadow.getElementById("table"));
+		const tasklist = this.#shadow.getElementById("table");
+		tasklist.remove;
     }
 
   	enableAddTask() {
@@ -136,7 +138,7 @@ export default class TaskList extends HTMLElement {
 		this.#changeStatusCallback = callback 
 	}
 	
-	deleteTaskCallback(id) {
-		this.#deleteTaskCallback 
+	deleteTaskCallback(id, callback) {
+		this.#deleteTaskCallback  = callback;
 	}
 }
