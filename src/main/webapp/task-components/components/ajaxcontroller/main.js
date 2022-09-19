@@ -1,10 +1,11 @@
-export default class AjaxController {
+export default class AjaxController extends HTMLElement {
     #taskBox = null;
     #taskList = null;
     #callbackAddTask;
     config = "../../TaskServices/api/services"
     constructor() {
 
+		super();
         //this.#taskList = document.getElementsByTagName("task-list");
         //this.#taskBox = document.getElementsByTagName("task-box");
 		console.log(document.querySelector("task-box"));

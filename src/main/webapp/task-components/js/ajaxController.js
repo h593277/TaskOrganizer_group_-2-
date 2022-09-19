@@ -1,3 +1,3 @@
-import ajaxController from '../components/ajaxcontroller/main.js';
+import AjaxController from '../components/ajaxcontroller/main.js';
 
-customElements.define('ajax-controller', ajaxController);
+customElements.define('ajax-controller', AjaxController);
