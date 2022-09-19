@@ -88,15 +88,16 @@ export default class TaskList extends HTMLElement {
 				<td><button id="${newTask.id}m">&lt;Modify&gt;</button></td>
         		<td><button id="${newTask.id}r">Remove</button></td>
     		</tr>
+    		<br>
         `;
         
 		let table = this.#shadow.getElementById("tablebody");
 		table.insertAdjacentHTML("afterbegin", content);
 		
-      	const btStatus = this.#shadow.getElementById(`${task.id}m`);
+      	const btStatus = this.#shadow.getElementById(`${newTask.id}m`);
 		btStatus.addEventListener('click', this.#updateTask.bind(this));
 		
-		const btRemove = this.#shadow.getElementById(`${task.id}r`);
+		const btRemove = this.#shadow.getElementById(`${newTask.id}r`);
 		btRemove.addEventListener('click', this.#removeTask.bind(this));
     }
 
