@@ -8,11 +8,11 @@ export default class AjaxController extends HTMLElement {
 		super();
         //this.#taskList = document.getElementsByTagName("task-list");
         //this.#taskBox = document.getElementsByTagName("task-box");
-		console.log(document.querySelector("task-box"));
         this.#taskBox = document.querySelector("task-box");
         this.#taskList = document.querySelector("task-list");
 		console.log(this.#taskBox);
-        this.#taskBox.newtaskCallback(this.#newTask.bind(this));
+		console.log(this.#taskList);
+        this.#taskBox.newTaskCallback(this.#newTask.bind(this));
         this.#taskList.addTaskCallback(this.#addTask.bind(this));
         this.#taskList.changeStatusCallback(this.changestatus.bind(this));
         this.#taskList.deleteTaskCallback(this.#deletetask.bind(this));

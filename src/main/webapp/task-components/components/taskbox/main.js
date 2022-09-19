@@ -29,7 +29,9 @@ export default class TaskBox extends HTMLElement {
 	#post(event) {
         // Samlestatus og title i objekt data
         // Hvis this.#callback ikke er null
+        console.log(event)
         this.#callback(data);
+        
         
     }
 	
@@ -47,7 +49,7 @@ export default class TaskBox extends HTMLElement {
 	}
 	*/
 	
-	#newTaskCallback(callback) {
+	newTaskCallback(callback) {
         this.#callback = callback;
 	
 	}
