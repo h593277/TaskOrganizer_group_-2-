@@ -63,10 +63,10 @@ export default class TaskList extends HTMLElement {
         return wrapper;
     }
   
-#OpenModal(event) {
-    // Hhvis #callbackAddTsk ike er null
-    //this.#callbackAddTask();
-}
+	#OpenModal(event) {
+	    // Hhvis #callbackAddTsk ike er null
+	    //this.#callbackAddTask();
+	}
  	#noTask() {
 		
 		const content = `
