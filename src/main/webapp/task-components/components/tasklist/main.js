@@ -79,14 +79,14 @@ export default class TaskList extends HTMLElement {
     }
 	
 	//Show modal dialog of taskbox
-    #showTask(newTask) {
+    showTask(newTask) {
 		
 		const content = `
 			<tr id="Tasks">
-        		<td>${task.title}</td>
-        		<td>${task.status}</td>        
-				<td><button id="${task.id}m">&lt;Modify&gt;</button></td>
-        		<td><button id="${task.id}r">Remove</button></td>
+        		<td>${newTask.title}</td>
+        		<td>${newTask.status}</td>        
+				<td><button id="${newTask.id}m">&lt;Modify&gt;</button></td>
+        		<td><button id="${newTask.id}r">Remove</button></td>
     		</tr>
         `;
         

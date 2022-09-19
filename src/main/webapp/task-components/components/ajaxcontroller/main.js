@@ -83,13 +83,17 @@ export default class AjaxController extends HTMLElement {
             this.#taskList.enableAddTask();
             try {
                 const result = await response.json();
+                console.log("results")
                 console.log(result);
+                for (let i = 0; i < response.tasks.length; i++) {
+					this.#taskList.showTask(response.tasks[i]);
+				}
                 result.textContent = JSON.stringify(result, null, 4);
             } catch (error) {
-                result.textContent = error;
+                console.log(error);
             }
         } catch (error) {
-            result.textContent = error;
+            console.log(error);
         }
     }
     async allStatus() {
