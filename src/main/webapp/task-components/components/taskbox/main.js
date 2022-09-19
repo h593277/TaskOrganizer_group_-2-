@@ -64,22 +64,6 @@ export default class TaskBox extends HTMLElement {
 		bool = false;
 	}
 	
-	async #getStatuses() {
-		const url = `../../TaskServices/api/services/allstatuses`
-		
-	    try {
-	        const response = await fetch(url, { method: "GET" })
-        	try {
-	          	return await response.json()
-	        } catch (error) {
-	            console.log(error)
-	        }
-	    } catch (error) {
-	        console.log(error);
-	    }
-	    return null;
-	}
-	
 	#addEventListeners(closebutton)	{
 		closebutton.addEventListener("click", this.close);
 		
