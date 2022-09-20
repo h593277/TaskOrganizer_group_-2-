@@ -1,7 +1,7 @@
 'use strict';
 
 //need this bool because style isnt visable to the DOM or shadowDOM
-const bool = false;
+let bool = false; //let, og ikke const da den skal endres senere
 const url = '../../TaskServices/api/services'
 
 export default class TaskBox extends HTMLElement {

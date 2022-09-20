@@ -47,7 +47,7 @@ export default class TaskList extends HTMLElement {
 			        <td>Task</td>
 			        <td>Status</td>
 			    </th>
-			    <div id=tablebody>
+			    <div id="tablebody">
 			    	
 			    </div>
 			    
