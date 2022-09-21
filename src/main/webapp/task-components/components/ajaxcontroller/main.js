@@ -52,7 +52,7 @@ export default class AjaxController extends HTMLElement {
 
     async #deletetask(id) {
         try {
-            await fetch(`${config}/task`, {
+            await fetch(`${config}/task/${id}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({ "id": id })
@@ -64,27 +64,28 @@ export default class AjaxController extends HTMLElement {
     }
 
     async #newTask(newTask) {
-		console.log(newTask)
+		let response = "";
         try {
-            await fetch(`${this.config}/task`, {
+            response = await fetch(`${this.config}/task`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({ "title": newTask.title, "status": newTask.status })
             });
+            
 
         } catch (error) {
             console.log(error);
         }
-        this.#taskList.showTask(newTask);
+        const result = await response.json();
+        this.#taskList.showTask(result.task);
     }
 
     async #getTasks() {
-        const url = `../../TaskServices/api/services/tasklist`;
         try {
-            
-            const response = await fetch(url, { method: "GET" });
+            const response = await fetch(`${this.config}/tasklist`, { method: "GET" });
             this.#taskList.enableAddTask();
             try {
+				
                 const result = await response.json();
 				result.tasks.forEach(t => {
 					this.#taskList.showTask(t);

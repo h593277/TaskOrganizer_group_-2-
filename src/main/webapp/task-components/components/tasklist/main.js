@@ -79,7 +79,7 @@ export default class TaskList extends HTMLElement {
 	showTask(newTask) {
 
 		const content = `
-			<tr id="${newTask.id}">
+			<tr id="Task${newTask.id}">
         		<td>${newTask.title}</td>
         		<td>${newTask.status}</td>        
 				<td><button id="${newTask.id}m">&lt;Modify&gt;</button></td>
@@ -120,13 +120,14 @@ export default class TaskList extends HTMLElement {
 	console.log(id);
 	console.log(this.#shadow.getElementById("table"));
 		//const tasklist = this.#shadow.getElementById("table");
-        const el = this.#shadow.getElementById(id);  
+        const el = this.#shadow.getElementById(`Task${id}`);  
 		el.remove();
 		const table = this.#shadow.getElementById("table");
 		if(table.querySelectorAll("tr").length == 1)
 		{
 			this.#noTask();
 		}
+		this.#deleteTaskCallback(id);
     }
 
   	enableAddTask() {
