@@ -91,7 +91,6 @@ export default class AjaxController extends HTMLElement {
             const response = await fetch(url, { method: "GET" });
             try {
                 const result = await response.json()
-                console.log(result);
                 this.#taskBox.setStatusesList(result) 
             } catch (error) {
                 console.log(error);

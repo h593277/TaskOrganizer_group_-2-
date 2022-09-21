@@ -10,8 +10,6 @@ export default class TaskList extends HTMLElement {
 
 		super();
 
-		// Entry point to the shadow DOM
-		// If open, property "shadowRoot" will be an outside entrance to the shadow DOM
 		this.#shadow = this.attachShadow({ mode: 'closed' });
 		this.#createStyle();
 		this.#createHTML();
@@ -58,8 +56,6 @@ export default class TaskList extends HTMLElement {
 	}
 
 	#OpenModal(event) {
-	    // Hvis #callbackAddTsk ikke er null
-	    //this.#callbackAddTask();
         if(this.#callbackAddTask !== null){
             this.#callbackAddTask(event);
         }
@@ -75,7 +71,6 @@ export default class TaskList extends HTMLElement {
 
 	}
 
-	//Show modal dialog of taskbox
 	showTask(newTask) {
 
 		const content = `
