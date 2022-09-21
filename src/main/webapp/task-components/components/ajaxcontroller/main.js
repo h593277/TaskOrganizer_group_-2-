@@ -64,6 +64,7 @@ export default class AjaxController extends HTMLElement {
     }
 
     async #newTask(newTask) {
+		console.log(newTask)
         try {
             await fetch(`${this.config}/task`, {
                 method: "POST",
@@ -74,7 +75,7 @@ export default class AjaxController extends HTMLElement {
         } catch (error) {
             console.log(error);
         }
-
+        this.#taskList.showTask(newTask);
     }
 
     async #getTasks() {
@@ -97,7 +98,6 @@ export default class AjaxController extends HTMLElement {
     }
     async allStatuses() {
         const url = `${this.config}/allstatuses`
-        
 
         try {
             const response = await fetch(url, { method: "GET" });

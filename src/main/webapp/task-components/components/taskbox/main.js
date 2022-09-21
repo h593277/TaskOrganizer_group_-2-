@@ -20,15 +20,21 @@ export default class TaskBox extends HTMLElement {
         
         const closebutton = this.#shadow.getElementById("close");
         this.#addEventListeners(closebutton);
-        this.#shadow.querySelector("button").addEventListener("click",this.#post.bind(this))
-         
+        this.#shadow.getElementById("submit").addEventListener("click",this.#post.bind(this))
 	}	
 	
 	#post(event) {
         // Samle status og title i objekt data
-        // Hvis this.#callback ikke er null
-        console.log(event) 
-        this.#callback(data);
+        const titleData = this.#shadow.getElementById("title").value;
+        const statusData = this.#shadow.getElementById("status").selectedOptions[0].value;
+        const data = {
+			title: titleData,
+			status: statusData
+		}
+        if(this.#callback !== null) {
+			this.#callback(data);
+		}
+        
     }
 	
 	setStatusesList(statusList) {
