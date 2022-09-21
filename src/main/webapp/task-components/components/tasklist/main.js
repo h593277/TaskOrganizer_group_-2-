@@ -40,17 +40,13 @@ export default class TaskList extends HTMLElement {
     #createHTML() {
         const content = `
             <button id="modalbtn" disabled type="button">New Task</button>
-			<h1>Task	Status</h1>
 			<h2>----------------------</h2>
 			<table id="table">
-			    <th id="tablehead">
-			        <td>Task</td>
-			        <td>Status</td>
-			    </th>
-			    <div id="tablebody">
-			    	
-			    </div>
-			    
+			    <tr id="tablehead">
+			        <td><h2>Task</h2></td>
+			        <td><h2>Status</h2></td>
+			    </tr>
+                
 			</table>
         `;
         const wrapper = document.createElement('div');
@@ -66,6 +62,9 @@ export default class TaskList extends HTMLElement {
 	#OpenModal(event) {
 	    // Hhvis #callbackAddTsk ike er null
 	    //this.#callbackAddTask();
+        if(this.#callbackAddTask !== null){
+            this.#callbackAddTask(event);
+        }
 	}
  	#noTask() {
 		
@@ -82,7 +81,7 @@ export default class TaskList extends HTMLElement {
     showTask(newTask) {
 		
 		const content = `
-			<tr id="Tasks">
+			<tr id="${newTask.id}">
         		<td>${newTask.title}</td>
         		<td>${newTask.status}</td>        
 				<td><button id="${newTask.id}m">&lt;Modify&gt;</button></td>
@@ -91,14 +90,16 @@ export default class TaskList extends HTMLElement {
     		<br>
         `;
         
-		let table = this.#shadow.getElementById("tablebody");
-		table.insertAdjacentHTML("afterbegin", content);
+		let table = this.#shadow.getElementById("table");
+		table.insertAdjacentHTML("beforeend", content);
 		
       	const btStatus = this.#shadow.getElementById(`${newTask.id}m`);
 		btStatus.addEventListener('click', this.#updateTask.bind(this));
 		
 		const btRemove = this.#shadow.getElementById(`${newTask.id}r`);
-		btRemove.addEventListener('click', this.#removeTask.bind(this));
+		btRemove.addEventListener('click', () =>{
+            this.#removeTask(newTask.id);
+        });
     }
 
 
@@ -120,8 +121,9 @@ export default class TaskList extends HTMLElement {
     #removeTask(id) {
 	console.log(id);
 	console.log(this.#shadow.getElementById("table"));
-		const tasklist = this.#shadow.getElementById("table");
-		tasklist.remove;
+		//const tasklist = this.#shadow.getElementById("table");
+        const el = this.#shadow.getElementById(id);  
+		el.remove();
     }
 
   	enableAddTask() {

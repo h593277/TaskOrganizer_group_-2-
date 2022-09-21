@@ -27,9 +27,9 @@ export default class TaskBox extends HTMLElement {
 	}	
 	
 	#post(event) {
-        // Samlestatus og title i objekt data
+        // Samle status og title i objekt data
         // Hvis this.#callback ikke er null
-        console.log(event)
+        console.log(event) 
         this.#callback(data);
         
         
@@ -65,7 +65,7 @@ export default class TaskBox extends HTMLElement {
 	}
 	
 	#addEventListeners(closebutton)	{
-		closebutton.addEventListener("click", this.close);
+		closebutton.addEventListener("click", this.close.bind(this));
 		
         document.addEventListener("keydown", (e) => {
 			if(e.key === 'Escape' && bool === true) {

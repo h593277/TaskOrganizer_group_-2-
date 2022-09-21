@@ -62,7 +62,7 @@ export default class AjaxController extends HTMLElement {
 
     async #newTask(newTask) {
         try {
-            await fetch(`${config}/task`, {
+            await fetch(`${this.config}/task`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({ "title": newTask.title, "status": newTask.status })
