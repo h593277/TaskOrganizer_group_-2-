@@ -65,14 +65,14 @@ export default class TaskList extends HTMLElement {
         }
 	}
 	#noTask() {
-
+	console.log("No task ran");
 		const content = `
           <p>No tasks currently</p>
         `;
-		const wrapper = document.createElement('div');
-		wrapper.insertAdjacentHTML('afterbegin', content);
-		this.#shadow.appendChild(wrapper);
-		return wrapper;
+
+		let table = this.#shadow.getElementById("table");
+		table.insertAdjacentHTML("beforebegin", content);
+
 	}
 
 	//Show modal dialog of taskbox
@@ -122,6 +122,11 @@ export default class TaskList extends HTMLElement {
 		//const tasklist = this.#shadow.getElementById("table");
         const el = this.#shadow.getElementById(id);  
 		el.remove();
+		const table = this.#shadow.getElementById("table");
+		if(table.querySelectorAll("button").length == 0)
+		{
+			this.#noTask();
+		}
     }
 
   	enableAddTask() {
