@@ -32,6 +32,22 @@ export default class TaskList extends HTMLElement {
 		return styleElement;
 	}
 
+	refreshTable()
+	{
+		let table = this.#shadow.getElementById("table");
+		while(table.firstChild)
+		{
+			table.removeChild(table.firstChild);
+		}
+		const content = `
+			    <tr id="tablehead">
+			        <td><h2>Task</h2></td>
+			        <td><h2>Status</h2></td>
+			    </tr>
+        `;
+
+		table.insertAdjacentHTML('afterbegin', content);
+	}
 
 	#createHTML() {
 		const content = `
@@ -102,14 +118,10 @@ export default class TaskList extends HTMLElement {
 
 	#updateTask(newStatus, id) {
 		this.#changeStatusCallback(newStatus, id);
-		let changingTask = this.#shadow.getElementById(`Task${id}`); 
-		changingTask.childNodes[3].innerHTML = newStatus;
 	
     }
 
     #removeTask(id) {
-        const el = this.#shadow.getElementById(`Task${id}`);  
-		el.remove();
 		const table = this.#shadow.getElementById("table");
 		if(table.querySelectorAll("tr").length == 1)
 		{

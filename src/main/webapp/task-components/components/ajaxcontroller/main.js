@@ -33,6 +33,8 @@ export default class AjaxController extends HTMLElement {
         } catch (error) {
             console.log(error);
         }
+	this.#taskList.refreshTable();
+	this.#getTasks();
     }
 
     #addTask() {
@@ -50,6 +52,8 @@ export default class AjaxController extends HTMLElement {
         } catch (error) {
             console.log(error);
         }
+	this.#taskList.refreshTable();
+	this.#getTasks();
     }
 
     async #newTask(newTask) {
