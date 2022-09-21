@@ -123,7 +123,7 @@ export default class TaskList extends HTMLElement {
         const el = this.#shadow.getElementById(id);  
 		el.remove();
 		const table = this.#shadow.getElementById("table");
-		if(table.querySelectorAll("button").length == 0)
+		if(table.querySelectorAll("tr").length == 1)
 		{
 			this.#noTask();
 		}
