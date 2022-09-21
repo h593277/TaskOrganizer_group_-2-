@@ -98,9 +98,6 @@ export default class TaskBox extends HTMLElement {
             .modal {
 				position: absolute;
 				display: none;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
 				
 				min-width: 20%;
 				width: fit-content(2rem);
