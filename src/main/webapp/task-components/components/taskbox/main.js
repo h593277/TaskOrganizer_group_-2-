@@ -9,7 +9,6 @@ export default class TaskBox extends HTMLElement {
 	#shadow;
 	#callback;
 	
-	
 	constructor() {
 		super();
 		
@@ -18,7 +17,6 @@ export default class TaskBox extends HTMLElement {
         this.#shadow.appendChild(style);
         const html = this.#getHTML();
         this.#shadow.appendChild(html);
-        
         
         const closebutton = this.#shadow.getElementById("close");
         this.#addEventListeners(closebutton);
@@ -31,14 +29,11 @@ export default class TaskBox extends HTMLElement {
         // Hvis this.#callback ikke er null
         console.log(event) 
         this.#callback(data);
-        
-        
     }
 	
-/*	#setStatusesList() {
-		const response = this.#getStatuses();
-		let statuses = response.allstatuses;
-
+	setStatusesList(statusList) {
+		const statuses = statusList.allstatuses;
+		
 		let statusbox = this.#shadow.getElementById('status');
 		for (let i = 0; i<statuses.length; i++){
 		    let opt = document.createElement('option');
@@ -47,11 +42,9 @@ export default class TaskBox extends HTMLElement {
 		    statusbox.appendChild(opt);
 		}
 	}
-	*/
 	
 	newTaskCallback(callback) {
         this.#callback = callback;
-	
 	}
 	
 	show() {

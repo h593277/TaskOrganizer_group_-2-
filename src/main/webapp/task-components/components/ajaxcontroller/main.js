@@ -18,6 +18,9 @@ export default class AjaxController extends HTMLElement {
         this.#taskList.deleteTaskCallback(this.#deletetask.bind(this));
         // this.addTask(this.#add.bind(this));
         this.#getTasks();
+        
+        this.allStatuses();
+        
     }
 
 
@@ -32,7 +35,7 @@ export default class AjaxController extends HTMLElement {
     async changestatus(status, id) {
 
         try {
-            await fetch(`${config}/task/${id}`, {
+            await fetch(`${this.config}/task/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({ "status": status })
@@ -84,7 +87,6 @@ export default class AjaxController extends HTMLElement {
                 const result = await response.json();
 				result.tasks.forEach(t => {
 					this.#taskList.showTask(t);
-					console.log(t)
 				})					
             } catch (error) {
                 console.log(error);
@@ -93,22 +95,21 @@ export default class AjaxController extends HTMLElement {
             console.log(error);
         }
     }
-    async allStatus() {
-        const url = `${config}/allstatuses`
-
-        document.querySelector("span").textContent = url;
-        const pre = document.querySelector("pre");
+    async allStatuses() {
+        const url = `${this.config}/allstatuses`
+        
 
         try {
             const response = await fetch(url, { method: "GET" });
             try {
                 const result = await response.json()
-                pre.textContent = JSON.stringify(result, null, 4);
+                console.log(result);
+                this.#taskBox.setStatusesList(result) 
             } catch (error) {
-                pre.textContent = error;
+                console.log(error);
             }
         } catch (error) {
-            pre.textContent = error;
+            console.log(error);
         }
     }
 }
