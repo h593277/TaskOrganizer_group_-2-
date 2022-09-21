@@ -102,6 +102,8 @@ export default class TaskList extends HTMLElement {
 
 	#updateTask(newStatus, id) {
 		this.#changeStatusCallback(newStatus, id);
+		let changingTask = this.#shadow.getElementById(`Task${id}`); 
+		changingTask.childNodes[3].innerHTML = newStatus;
 	
     }
 
