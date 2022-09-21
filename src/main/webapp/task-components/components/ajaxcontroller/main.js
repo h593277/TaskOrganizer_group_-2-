@@ -24,7 +24,6 @@ export default class AjaxController extends HTMLElement {
     }
 
     async changestatus(status, id) {
-
         try {
             await fetch(`${this.config}/task/${id}`, {
                 method: "PUT",

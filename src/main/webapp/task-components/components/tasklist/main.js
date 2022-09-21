@@ -77,7 +77,11 @@ export default class TaskList extends HTMLElement {
 			<tr id="Task${newTask.id}">
         		<td>${newTask.title}</td>
         		<td>${newTask.status}</td>        
-				<td><button id="${newTask.id}m">&lt;Modify&gt;</button></td>
+				<td><select id="${newTask.id}m">&lt;Modify&gt;
+				 <option value="ACTIVE">ACTIVE</option>
+				    <option value="WAITING">WAITING</option>
+				    <option value="DONE">DONE</option>
+				</select></td>
         		<td><button id="${newTask.id}r">Remove</button></td>
     		</tr>
     		<br>
@@ -88,7 +92,7 @@ export default class TaskList extends HTMLElement {
 		
       	const btStatus = this.#shadow.getElementById(`${newTask.id}m`);
 
-		btStatus.addEventListener('click', this.#updateTask.bind(this));
+		btStatus.addEventListener('change', () => {this.#updateTask(btStatus.value, newTask.id)});
 
 		const btRemove = this.#shadow.getElementById(`${newTask.id}r`);
 		btRemove.addEventListener('click', () =>{
@@ -96,18 +100,8 @@ export default class TaskList extends HTMLElement {
         });
     }
 
-	#updateTask(id, newStatus) {
-
-		const tasklist = document.querySelector("task-list");
-		const status = {
-			"id": id,
-			"status": newStatus
-		};
-		const taskUpdate = document.getElementById(id);
-		
-		tasklist.updateTask(status);
-		
-		changestatusCallback(status);
+	#updateTask(newStatus, id) {
+		this.#changeStatusCallback(newStatus, id);
 	
     }
 
